@@ -25,7 +25,36 @@ const Service = () => {
     };
     fetchData();
   }, []);
-
+const services = [
+  {
+    icon: 'fa-home',
+    title: 'Wide Range of Properties',
+    description:
+      'We offer a wide selection of residential and commercial properties tailored to your needs, locations, and budget.',
+    image: '/images/provide/wide_range_property.png',
+  },
+  {
+    icon: 'fa-handshake',
+    title: 'Trusted Dealings',
+    description:
+      'We ensure all transactions are safe and transparent. Your satisfaction and trust are our top priorities.',
+    image: '/images/provide/Trust_partener.png',
+  },
+  {
+    icon: 'fa-tags',
+    title: 'Affordable Pricing',
+    description:
+      'Whether you’re buying or selling, we help you get the best value in the current market.',
+    image: '/images/provide/Affordable_price.png',
+  },
+  {
+    icon: 'fa-calendar-alt',
+    title: 'Easy Viewing Schedule',
+    description:
+      'Book property visits at your convenience. We make the process smooth and efficient for busy buyers.',
+    image: '/images/provide/Easy_view_schedule.png',
+  },
+]
   return (
     <section id="service" className="scroll-mt-20">
       <div className="container">
@@ -86,6 +115,48 @@ const Service = () => {
             </div>
           </div>
         </div>
+
+           <section className='w-full py-10 bg-white ' >
+      <div className='container mx-auto px-4'>
+        <div className='text-center mb-12'>
+          <h4 className='uppercase tracking-[5px] text-lg text text-primary'>
+            Our Services
+          </h4>
+          <h1 className='text-4xl font-bold mt-2'>
+            Trusted & Professional Property Sales
+          </h1>
+        </div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
+          {services.map((service, index) => (
+            <div
+              className='flex flex-col sm:flex-row items-center gap-6'
+              key={index}
+            >
+              {/* IMAGE */}
+              <div className='w-full sm:w-1/3'>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={300}
+                  height={200}
+                  className='rounded shadow-md w-full h-auto'
+                />
+              </div>
+
+              {/* CONTENT */}
+              <div className='w-full sm:w-2/3'>
+                <h4 className='text-xl font-semibold flex items-center gap-2'>
+                  <i className={`fa ${service.icon} text-blue-600 text-xl`} />
+                  {service.title}
+                </h4>
+                <p className='text-gray-600 mt-2'>{service.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
       </div>
     </section>
   );

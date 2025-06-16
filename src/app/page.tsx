@@ -8,6 +8,8 @@ import Network from './components/Home/Network'
 import Review from './components/Home/Review'
 import ContactForm from './components/Contact/Form'
 import Newsletter from './components/Home/Newsletter/Newsletter'
+import MainService from './components/Home/MainService'
+import WebsiteInterface from './components/Home/WebsiteInterface'
 
 export const metadata: Metadata = {
   title: 'weeam.',
@@ -20,6 +22,8 @@ export default function Home() {
       {/* <Company /> */}
       <Records />
       <Service />
+      <MainService/>
+      <WebsiteInterface/>
       <AboutUs />
       <Network />
       <Review />
