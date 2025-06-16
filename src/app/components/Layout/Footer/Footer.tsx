@@ -133,7 +133,7 @@ const Footer = () => {
                 </Link>
               </div>
 
-              <div className="my-10 flex gap-5 sm:flex-col md:flex-row">
+              <div className="my-10 grid md:grid-cols-2 sm:grid-cols-1 items-center gap-3">
                 <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                   alt="Google Play"
