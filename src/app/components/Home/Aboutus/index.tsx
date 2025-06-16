@@ -91,7 +91,7 @@ const AboutUs = () => {
           <h1 className="text-center ">Serving Since 1950</h1>
         </div>
 
-        <div className="grid grid-cols-3 lg:grid-cols-3 gap-10 w-full sm:grid-cols-1">
+        <div className="grid  lg:grid-cols-3 gap-10 w-full sm:grid-cols-1">
           {/* Our Story */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-bold mb-3">Our Story</h2>
