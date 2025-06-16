@@ -56,9 +56,9 @@ const Footer = () => {
 			}
 
 			// Trigger download
-			const link = document.createElement('a');
+			const link:HTMLAnchorElement = document.createElement('a');
 			link.href = url;
-			link.download = url.split('/').pop(); // gets file name
+			link.download = url.split('/').pop() ?? 'download.apk';
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
@@ -69,6 +69,7 @@ const Footer = () => {
 			toast.error('Failed to download APK');
 		}
   }
+
   return (
     <footer className="bg-darkblue">
       <div className=" container -mt-48">
@@ -139,6 +140,7 @@ const Footer = () => {
                   width={200}
                   height={40}
                   onClick={handlerDownloadAPK}
+                  className=" cursor-pointer"
                 />
                 <a href="https://apps.apple.com/pk/app/weeam-crm/id6744808346" target="_blank">
                 <Image
