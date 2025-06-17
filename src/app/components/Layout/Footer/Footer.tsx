@@ -133,12 +133,12 @@ const Footer = () => {
                 </Link>
               </div>
 
-              <div className="my-10 grid md:grid-cols-2 sm:grid-cols-1 items-center gap-3">
+              <div className="my-10 flex md:flex-row sm:flex-col gap-3">
                 <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                   alt="Google Play"
-                  width={200}
-                  height={40}
+                  width={100}
+                  height={45}
                   onClick={handlerDownloadAPK}
                   className=" cursor-pointer"
                 />
@@ -146,8 +146,8 @@ const Footer = () => {
                 <Image
                   src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                   alt="Google Play"
-                  width={200}
-                  height={40}
+                  width={100}
+                  height={45}
                 />
                 </a>
               </div>
