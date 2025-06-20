@@ -15,6 +15,7 @@ const Header: React.FC = () => {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
+  // const navbarRef = useRef<HTMLDivElement>(null)
   const signInRef = useRef<HTMLDivElement>(null);
   const signUpRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -87,7 +88,7 @@ const Header: React.FC = () => {
           <div>
             <Logo />
           </div>
-          <nav className="hidden lg:flex grow items-center gap-4 xl:gap-6 justify-center">
+          <nav className="hidden lg:flex grow items-center gap-4 xl:gap-6  justify-center">
             {headerLink.map((item, index) => (
               <HeaderLink key={index} item={item} />
             ))}
@@ -104,25 +105,20 @@ const Header: React.FC = () => {
             </button>
           </div>
         </div>
-        
-        <div
-          className={`fixed top-0 left-0 w-full h-full bg-black/50 z-40 transition-opacity duration-300 ${
-            navbarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        />
-
-        {/* Mobile Menu with slide + fade animation */}
+        {navbarOpen && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black/50 z-40" />
+        )}
         <div
           ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white shadow-lg max-w-xs z-50
-            transform transition-all duration-300 ease-in-out
-            ${navbarOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"}
-          `}
+          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white shadow-lg transform transition-transform duration-300 max-w-xs ${
+            navbarOpen ? "translate-x-0" : "translate-x-full"
+          } z-50`}
         >
           <div className="flex items-center justify-between gap-2 p-4">
             <div>
               <Logo />
             </div>
+            {/*  */}
             <button
               onClick={() => setNavbarOpen(false)}
               className="hover:cursor-pointer"
@@ -132,7 +128,7 @@ const Header: React.FC = () => {
                 icon="material-symbols:close-rounded"
                 width={24}
                 height={24}
-                className="text-black hover:text-primary inline-block me-2"
+                className="text-black hover:text-primary text-24 inline-block me-2"
               />
             </button>
           </div>
