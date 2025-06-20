@@ -14,11 +14,11 @@ const Hero = () => {
         if (entry.isIntersecting) {
           setIsVisible(true);
         } else {
-          setIsVisible(false); // optional: remove this line if you want the animation to trigger only once
+          setIsVisible(false); 
         }
       },
       {
-        threshold: 0.1, // 10% visible to trigger
+        threshold: 0.1, 
       }
     );
 

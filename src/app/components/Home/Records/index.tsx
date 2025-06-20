@@ -28,14 +28,13 @@ const Records = () => {
     fetchData();
   }, []);
 
-  // Trigger animation when section is in viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
         } else {
-          setIsVisible(false); // remove this line if you want animation only once
+          setIsVisible(false); 
         }
       },
       {

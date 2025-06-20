@@ -6,7 +6,7 @@ import { AboutType } from "@/app/types/about";
 import AboutSkeleton from "../../Skeleton/AboutSkeleton";
 
 const AboutUs = () => {
-  const [about, SetAbout] = useState<AboutType[]>([]);
+  const [about, setAbout] = useState<AboutType[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Refs
@@ -24,33 +24,37 @@ const AboutUs = () => {
     bottomRight: false,
   });
 
-useEffect(() => {
-  const observerOptions = { threshold: 0.2 };
+  useEffect(() => {
+    const observerOptions = { threshold: 0.2 };
 
-  const createObserver = (
-    ref: React.RefObject<HTMLDivElement>,
-    key: keyof typeof visible
-  ) => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setVisible((prev) => ({
-        ...prev,
-        [key]: entry.isIntersecting, 
-      }));
-    }, observerOptions);
-    if (ref.current) observer.observe(ref.current);
-    return observer;
-  };
+    const createObserver = (
+      ref: React.RefObject<HTMLDivElement | null>,
+      key: keyof typeof visible
+    ) => {
+      const observer = new IntersectionObserver(([entry]) => {
+        setVisible((prev) => ({
+          ...prev,
+          [key]: entry.isIntersecting,
+        }));
+      }, observerOptions);
 
-  const observers = [
-    createObserver(topLeftRef, "topLeft"),
-    createObserver(topRightRef, "topRight"),
-    createObserver(bottomLeftRef, "bottomLeft"),
-    createObserver(centerRef, "center"),
-    createObserver(bottomRightRef, "bottomRight"),
-  ];
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
 
-  return () => observers.forEach((observer) => observer.disconnect());
-}, []);
+      return observer;
+    };
+
+    const observers = [
+      createObserver(topLeftRef, "topLeft"),
+      createObserver(topRightRef, "topRight"),
+      createObserver(bottomLeftRef, "bottomLeft"),
+      createObserver(centerRef, "center"),
+      createObserver(bottomRightRef, "bottomRight"),
+    ];
+
+    return () => observers.forEach((observer) => observer.disconnect());
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,9 +62,9 @@ useEffect(() => {
         const res = await fetch("/api/data");
         if (!res.ok) throw new Error("Failed to fetch.");
         const data = await res.json();
-        SetAbout(data.AboutData);
+        setAbout(data.AboutData);
       } catch (error) {
-        console.error("Error fetching services:", error);
+        console.error("Error fetching about data:", error);
       } finally {
         setLoading(false);
       }
@@ -106,7 +110,7 @@ useEffect(() => {
             <div className="mt-10">
               {loading
                 ? Array.from({ length: 3 }).map((_, i) => <AboutSkeleton key={i} />)
-                : about.map((items, i) => (
+                : about.map((item, i) => (
                     <div className="flex mt-4" key={i}>
                       <div className="rounded-full h-10 w-12 p-1.5 flex items-center justify-center bg-circlebg">
                         <Image
@@ -117,8 +121,8 @@ useEffect(() => {
                         />
                       </div>
                       <div className="ml-5">
-                        <p className="text-2xl text-black font-semibold">{items.heading}</p>
-                        <p className="text-lg text-beach font-normal mt-2">{items.subheading}</p>
+                        <p className="text-2xl text-black font-semibold">{item.heading}</p>
+                        <p className="text-lg text-beach font-normal mt-2">{item.subheading}</p>
                       </div>
                     </div>
                   ))}
@@ -143,7 +147,7 @@ useEffect(() => {
           <div
             ref={bottomLeftRef}
             className={`flex flex-col justify-center transition-all duration-1000 ease-out transform ${
-              visible.bottomLeft ? "opacity-100 -translate-x-0" : "opacity-0 -translate-x-10"
+              visible.bottomLeft ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
             }`}
           >
             <h2 className="text-3xl font-bold mb-3">Our Story</h2>

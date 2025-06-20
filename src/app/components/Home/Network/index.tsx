@@ -23,7 +23,7 @@ const Network = () => {
     const observerOptions = { threshold: 0.2 };
 
     const createObserver = (
-      ref: React.RefObject<HTMLElement>,
+      ref: React.RefObject<HTMLElement | null>,
       key: keyof typeof visible
     ) => {
       const observer = new IntersectionObserver(([entry]) => {

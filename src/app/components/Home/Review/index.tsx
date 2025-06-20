@@ -20,7 +20,7 @@ const Review = () => {
     const options = { threshold: 0.2 };
 
     const observeElement = (
-      ref: React.RefObject<HTMLElement>,
+      ref: React.RefObject<HTMLElement | null>,
       key: keyof typeof visible
     ) => {
       const observer = new IntersectionObserver(([entry]) => {

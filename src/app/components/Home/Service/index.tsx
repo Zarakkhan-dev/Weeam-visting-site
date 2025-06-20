@@ -37,10 +37,9 @@ const Service = () => {
     fetchData();
   }, []);
 
-  // Observer for columns
   useEffect(() => {
     const observe = (
-      ref: React.RefObject<HTMLElement>,
+      ref: React.RefObject<HTMLElement | null>,
       setter: (v: boolean) => void
     ) => {
       if (!ref.current) return;
@@ -62,10 +61,11 @@ const Service = () => {
       observe(centerRef, setCenterVisible),
     ];
 
-    return () => cleanups.forEach((cleanup) => cleanup?.());
+    return () => {
+      cleanups.forEach((cleanup) => cleanup?.());
+    };
   }, []);
 
-  // Observer for bottom grid cards
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
@@ -87,7 +87,9 @@ const Service = () => {
       observers.push(observer);
     });
 
-    return () => observers.forEach((observer) => observer.disconnect());
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
   }, [service]);
 
   const services = [
@@ -193,7 +195,6 @@ const Service = () => {
           </div>
         </div>
 
-        {/* Section Heading + Cards */}
         <section
           className={`w-full py-10 bg-white transition-all duration-1000 ease-out ${
             centerVisible
@@ -216,7 +217,9 @@ const Service = () => {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  ref={(el) => (cardRefs.current[index] = el)}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   className={`flex flex-col sm:flex-row items-center gap-6 transform transition-all duration-1000 ease-out ${
                     cardVisible[index]
                       ? "opacity-100 translate-y-0"
