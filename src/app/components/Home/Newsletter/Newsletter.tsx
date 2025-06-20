@@ -1,10 +1,32 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const Newsletter = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section>
       <div className="relative z-1">
-        <div className="container bg-primary rounded-2xl">
+        <div
+          ref={containerRef}
+          className={`container bg-primary rounded-2xl transition-all duration-1000 ease-out transform ${
+            visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
+        >
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
             {/* COLUMN-1 */}
             <div className="hidden lg:block">
@@ -36,9 +58,7 @@ const Newsletter = () => {
 
             {/* COLUMN-2 */}
             <div className="p-10 flex flex-col justify-center">
-              <h3 className="mb-3 text-white">
-                Join Weeam Real Estate Network
-              </h3>
+              <h3 className="mb-3 text-white">Join Weeam Real Estate Network</h3>
               <p className="text-base font-normal mb-7 text-offwhite">
                 At WEAM ELNAGGAR REAL ESTATE, we offer a network of diverse
                 branches designed for you to connect, apply, and build a bright
