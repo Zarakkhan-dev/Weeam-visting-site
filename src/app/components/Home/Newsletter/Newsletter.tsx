@@ -23,7 +23,7 @@ const Newsletter = () => {
       <div className="relative z-1">
         <div
           ref={containerRef}
-          className={`container bg-primary rounded-2xl transition-all duration-1000 ease-out transform ${
+          className={`container bg-[#607caf] rounded-2xl transition-all duration-1000 ease-out transform ${
             visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
